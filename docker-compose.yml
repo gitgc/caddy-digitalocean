@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  caddy:
+    build: .
+    restart: unless-stopped
+    network_mode: host
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DO_AUTH_TOKEN=<PUT TOKEN HERE>
+    volumes:
+      - "./Caddyfile:/etc/caddy/Caddyfile"
+      - "./site/:/var/www/html/"
+      - "./caddy_data/:/data/"
+      - "./caddy_config/:/config/"
